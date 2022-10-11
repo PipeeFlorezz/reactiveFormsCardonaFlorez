@@ -1,0 +1,81 @@
+<div class="row"> 
+    <h5>Formulario </h5>
+    <div class="col">
+        <form [formGroup]="form"  (ngSubmit)="Registrar(form)">
+            <div class="row">
+                <div class="col">
+                    <label for="name" class="form-label">Nombre</label>
+                    <div class="input-group mb-3">
+                        <input type="text" 
+                        [ngClass]="{'form-control': true, 'is-invalid': form.get('name')?.errors && form.get('name')?.touched}"
+                         formControlName="name" placeholder="Nombre">
+                        <div class="invalid-feedback">
+                            <small *ngIf="form.get('name')?.errors?.['required'] && form.get('name')?.touched">El campo es requerido</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <div class="input-group mb-3">
+                        <input type="text" 
+                        [ngClass]="{'form-control': true, 'is-invalid': form.get('lastName')?.errors && form.get('lastName')?.touched}" 
+                        formControlName="lastName" placeholder="Apellido">
+                        <div class="invalid-feedback">
+                            <small *ngIf="form.get('lastName')?.errors?.['required'] && form.get('lastName')?.touched">El campo es requerido</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="age" class="form-label">Edad</label>
+                    <div class="input-group mb-3">
+                        <input type="text" 
+                        [ngClass]="{'form-control': true, 'is-invalid': form.get('age')?.errors && form.get('age')?.touched}" 
+                        formControlName="age" placeholder="Edad">
+                        <div class="invalid-feedback">
+                            <small *ngIf="form.get('age')?.errors?.['min']">Los deportistas deben tener como minimo una edad de 15 años</small>
+                            <small *ngIf="form.get('age')?.errors?.['required'] && form.get('age')?.touched">El campo es requerido</small>
+                            <small *ngIf="form.get('age')?.errors?.['failAge'] && form.get('age')?.touched"> La edad debe de ser por obligacion un numero</small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-group mb-3">
+                        <input type="password" 
+                        [ngClass]="{'form-control': true, 'is-invalid': form.get('password')?.errors && form.get('password')?.touched}" 
+                        formControlName="password" placeholder="Contraseña">
+                        <div class="invalid-feedback">
+                            <small *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">El campo es requerido</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" formArrayName="skills">
+                    <div *ngFor="let hablitiy of skils.controls; let i = index">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" formControlName="{{i}}"
+                            placeholder="Habilidad {{i + 1}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-info btn-sm" (click)="addHability()">Agregar Habilidad</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-success btn-sm" [disabled]="!form.valid">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

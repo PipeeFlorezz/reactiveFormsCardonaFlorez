@@ -1,0 +1,11 @@
+<div class="container border p-4">
+  <div class="row">
+    <h3>Deportistas</h3>
+    <div class="col">
+      <app-form (addAthlete)="sendAthlete($event)"></app-form>
+    </div>
+    <div class="col">
+      <app-list-items [athletes]="Athletes"></app-list-items>
+    </div>
+  </div>
+</div>
